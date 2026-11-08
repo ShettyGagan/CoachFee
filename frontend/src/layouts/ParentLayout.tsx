@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { LogOut, GraduationCap, ChevronDown } from 'lucide-react'
-import { api } from '../lib/api'
+import { api, setStoredToken } from '../lib/api'
 import { useQueryClient } from '@tanstack/react-query'
 
 export function ParentLayout({ children }: { children: ReactNode }) {
@@ -9,7 +9,10 @@ export function ParentLayout({ children }: { children: ReactNode }) {
   const qc = useQueryClient()
 
   const signOut = async () => {
-    await api.post('/auth/logout')
+    try {
+      await api.post('/auth/logout')
+    } catch {}
+    setStoredToken(null)
     qc.clear()
     navigate('/login')
   }

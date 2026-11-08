@@ -48,7 +48,13 @@ def staff_login(
     token = create_jwt(sub=user.id, kind="staff", role=user.role, centre_id=user.centre_id)
     set_session_cookie(response, token, host=request.headers.get("host"))
 
-    return {"id": user.id, "name": user.name, "role": user.role, "centre_id": user.centre_id}
+    return {
+        "id": user.id,
+        "name": user.name,
+        "role": user.role,
+        "centre_id": user.centre_id,
+        "token": token,
+    }
 
 
 @router.post("/parent/verify")
@@ -99,13 +105,14 @@ def parent_verify(
         "name": guardian.name,
         "language": guardian.language,
         "needs_consent": guardian.consented_at is None,
+        "token": token,
     }
 
 
 @router.post("/logout", status_code=204)
-def logout(response: Response, _: dict = Depends(current_principal)):
+def logout(response: Response, request: Request, _: dict = Depends(current_principal)):
     """Clear the session cookie."""
-    clear_session_cookie(response)
+    clear_session_cookie(response, host=request.headers.get("host"))
 
 
 @router.get("/me")

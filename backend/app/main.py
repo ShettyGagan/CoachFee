@@ -19,9 +19,13 @@ app = FastAPI(
 )
 
 # ---- CORS ----
+# Strip any trailing slashes from configured origins and exclude wildcards when credentials are enabled
+_configured_origins = [o.strip().rstrip("/") for o in settings.CORS_ORIGINS.split(",") if o.strip() and o.strip() != "*"]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[o.strip() for o in settings.CORS_ORIGINS.split(",") if o.strip()],
+    allow_origins=_configured_origins,
+    allow_origin_regex=r"^https?:\/\/(localhost(:\d+)?|127\.0\.0\.1(:\d+)?|.*\.vercel\.app)$",
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

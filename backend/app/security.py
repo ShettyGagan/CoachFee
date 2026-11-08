@@ -98,32 +98,51 @@ def _is_localhost(request_or_host: str | None = None) -> bool:
 
 
 def set_session_cookie(response: Response, token: str, *, host: str | None = None) -> None:
-    """Set the ``session`` httpOnly cookie on *response*."""
-    secure = not _is_localhost(host)
+    """Set the ``session`` httpOnly cookie on *response*.
+
+    Uses samesite="none" with secure=True in production to support cross-domain deployments (e.g. Vercel + Render).
+    """
+    is_local = _is_localhost(host)
+    secure = not is_local
+    samesite = "lax" if is_local else "none"
     response.set_cookie(
         key=_COOKIE_NAME,
         value=token,
         httponly=True,
-        samesite="lax",
+        samesite=samesite,
         secure=secure,
         max_age=int(_JWT_LIFETIME.total_seconds()),
         path="/",
     )
 
 
-def clear_session_cookie(response: Response) -> None:
+def clear_session_cookie(response: Response, *, host: str | None = None) -> None:
     """Delete the ``session`` cookie."""
-    response.delete_cookie(key=_COOKIE_NAME, path="/")
+    is_local = _is_localhost(host)
+    secure = not is_local
+    samesite = "lax" if is_local else "none"
+    response.delete_cookie(
+        key=_COOKIE_NAME,
+        path="/",
+        httponly=True,
+        samesite=samesite,
+        secure=secure,
+    )
 
 
 # ──────────────────────── FastAPI dependencies ─────────────────── #
 
 def current_principal(request: Request) -> dict[str, Any]:
-    """Read the JWT from the ``session`` cookie and return claims.
+    """Read the JWT from the ``session`` cookie or ``Authorization: Bearer <token>`` header and return claims.
 
-    Raises ``401`` when the cookie is missing or the token is invalid.
+    Raises ``401`` when missing or invalid.
     """
     token = request.cookies.get(_COOKIE_NAME)
+    if not token:
+        auth_header = request.headers.get("Authorization")
+        if auth_header and auth_header.startswith("Bearer "):
+            token = auth_header[7:].strip()
+
     if not token:
         raise HTTPException(
             status_code=401,

@@ -7,7 +7,7 @@ import {
 } from 'lucide-react'
 import { clsx } from 'clsx'
 import { toast } from 'sonner'
-import { api } from '../lib/api'
+import { api, setStoredToken } from '../lib/api'
 import { useMe } from '../lib/auth'
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { formatINR, formatDate } from '../lib/formatINR'
@@ -224,7 +224,10 @@ export function StaffLayout({ children, centreId, onCentreChange }: StaffLayoutP
   }
 
   const signOut = async () => {
-    await api.post('/auth/logout')
+    try {
+      await api.post('/auth/logout')
+    } catch {}
+    setStoredToken(null)
     qc.clear()
     navigate('/login')
   }

@@ -8,7 +8,7 @@ import {
   type ConfirmationResult,
 } from 'firebase/auth'
 import { auth } from '../lib/firebase'
-import { api, ApiError } from '../lib/api'
+import { api, ApiError, setStoredToken } from '../lib/api'
 import { clsx } from 'clsx'
 
 type Tab = 'parent' | 'staff'
@@ -73,8 +73,9 @@ export default function Login() {
   // ── Staff Login Mutation ──────────────────────────────────────────────────
   const staffMutation = useMutation({
     mutationFn: (data: { email: string; password: string }) =>
-      api.post<{ role: string }>('/auth/staff/login', data),
+      api.post<{ role: string; token?: string }>('/auth/staff/login', data),
     onSuccess: (data) => {
+      if (data.token) setStoredToken(data.token)
       qc.invalidateQueries({ queryKey: ['me'] })
       if (data.role === 'counsellor') navigate('/staff/risk')
       else navigate('/staff')
@@ -89,8 +90,9 @@ export default function Login() {
   // ── Parent Verify Token Mutation ──────────────────────────────────────────
   const verifyMutation = useMutation({
     mutationFn: (id_token: string) =>
-      api.post<{ needs_consent: boolean }>('/auth/parent/verify', { id_token }),
+      api.post<{ needs_consent: boolean; token?: string }>('/auth/parent/verify', { id_token }),
     onSuccess: (data) => {
+      if (data.token) setStoredToken(data.token)
       qc.invalidateQueries({ queryKey: ['me'] })
       if (data.needs_consent) navigate('/parent/consent')
       else navigate('/parent')
