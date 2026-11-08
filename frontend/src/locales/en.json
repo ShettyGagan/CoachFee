@@ -1,0 +1,99 @@
+{
+  "login": {
+    "title": "Sign In",
+    "parent": "Parent",
+    "staff": "Staff",
+    "phone": "Phone number",
+    "phonePlaceholder": "10-digit mobile number",
+    "sendCode": "Send code",
+    "verify": "Verify",
+    "resendIn": "Resend in {{s}}s",
+    "resend": "Resend code",
+    "email": "Email",
+    "password": "Password",
+    "signIn": "Sign in",
+    "errors": {
+      "INVALID_CREDENTIALS": "Email or password is incorrect.",
+      "PHONE_NOT_REGISTERED": "This number is not registered with the institute.",
+      "OTP_PROVIDER_UNAVAILABLE": "We could not send the code. Please try again.",
+      "tooMany": "Too many attempts. Try again in a minute."
+    }
+  },
+  "parent": {
+    "home": {
+      "amountDue": "Amount due",
+      "dueOn": "Due {{date}}",
+      "payButton": "Pay {{amount}}",
+      "totalRemaining": "Total remaining {{amount}}",
+      "allPaid": "All fees are paid",
+      "instalments": "Instalments",
+      "receipts": "Receipts",
+      "noChildren": "No students are linked to this number. Please contact the institute.",
+      "instalment": "Instalment {{n}}"
+    },
+    "consent": {
+      "title": "Your Consent / आपकी सहमति",
+      "agree": "I am the parent or guardian and I agree",
+      "continue": "Continue",
+      "policyVersion": "Policy version"
+    },
+    "receipt": {
+      "title": "Receipt",
+      "print": "Print",
+      "taxable": "Taxable amount",
+      "cgst": "CGST 9%",
+      "sgst": "SGST 9%",
+      "total": "Total"
+    }
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "students": "Students",
+    "payments": "Payments",
+    "reminders": "Reminders",
+    "refunds": "Refunds",
+    "risk": "Risk flags",
+    "setup": "Setup",
+    "signOut": "Sign out"
+  },
+  "common": {
+    "loading": "Loading…",
+    "retry": "Retry",
+    "cancel": "Cancel",
+    "save": "Save",
+    "confirm": "Confirm",
+    "search": "Search",
+    "filter": "Filter",
+    "all": "All",
+    "noData": "No data",
+    "error": "Something went wrong. Please try again.",
+    "notFound": "We could not find that.",
+    "forbidden": "You do not have access to this."
+  },
+  "status": {
+    "paid": "Paid",
+    "upcoming": "Upcoming",
+    "part_paid": "Part paid",
+    "overdue": "Overdue",
+    "part_paid_overdue": "Part paid, overdue",
+    "active": "Active",
+    "left": "Left",
+    "completed": "Completed",
+    "open": "Open",
+    "called": "Called",
+    "false_flag": "False flag",
+    "draft": "Draft",
+    "approved": "Approved",
+    "sent": "Sent",
+    "pending": "Pending",
+    "skipped": "Skipped",
+    "cancelled": "Cancelled",
+    "cash": "Cash",
+    "cheque": "Cheque",
+    "bank_transfer": "Bank transfer",
+    "online": "Online",
+    "high": "High",
+    "medium": "Medium"
+  }
+}
+

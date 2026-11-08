@@ -1,0 +1,24 @@
+
+# Web framework
+fastapi
+uvicorn[standard]
+
+# Database (PostgreSQL / Neon)
+sqlalchemy
+psycopg[binary]
+alembic
+
+# Validation and settings
+pydantic[email]
+pydantic-settings
+
+# Auth: staff passwords, JWT sessions, parent OTP (Firebase ID token check)
+bcrypt
+pyjwt
+firebase-admin
+
+# Rate limiting for login endpoints
+slowapi
+
+# HTTP client for Cashfree API calls
+httpx

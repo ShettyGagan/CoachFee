@@ -1,0 +1,99 @@
+{
+  "login": {
+    "title": "साइन इन करें",
+    "parent": "अभिभावक",
+    "staff": "स्टाफ",
+    "phone": "फ़ोन नंबर",
+    "phonePlaceholder": "10 अंकों का मोबाइल नंबर",
+    "sendCode": "कोड भेजें",
+    "verify": "सत्यापित करें",
+    "resendIn": "{{s}} सेकंड में पुनः भेजें",
+    "resend": "कोड पुनः भेजें",
+    "email": "ईमेल",
+    "password": "पासवर्ड",
+    "signIn": "साइन इन",
+    "errors": {
+      "INVALID_CREDENTIALS": "ईमेल या पासवर्ड गलत है।",
+      "PHONE_NOT_REGISTERED": "यह नंबर संस्थान में पंजीकृत नहीं है।",
+      "OTP_PROVIDER_UNAVAILABLE": "कोड नहीं भेज सके। कृपया पुनः प्रयास करें।",
+      "tooMany": "बहुत अधिक प्रयास। एक मिनट में पुनः प्रयास करें।"
+    }
+  },
+  "parent": {
+    "home": {
+      "amountDue": "देय राशि",
+      "dueOn": "{{date}} तक देय",
+      "payButton": "{{amount}} भुगतान करें",
+      "totalRemaining": "कुल शेष {{amount}}",
+      "allPaid": "सभी फीस भुगतान हो गई",
+      "instalments": "किस्तें",
+      "receipts": "रसीदें",
+      "noChildren": "इस नंबर से कोई छात्र नहीं जुड़ा है। संस्थान से संपर्क करें।",
+      "instalment": "किस्त {{n}}"
+    },
+    "consent": {
+      "title": "Your Consent / आपकी सहमति",
+      "agree": "मैं अभिभावक हूँ और सहमत हूँ",
+      "continue": "जारी रखें",
+      "policyVersion": "नीति संस्करण"
+    },
+    "receipt": {
+      "title": "रसीद",
+      "print": "प्रिंट",
+      "taxable": "कर योग्य राशि",
+      "cgst": "CGST 9%",
+      "sgst": "SGST 9%",
+      "total": "कुल"
+    }
+  },
+  "nav": {
+    "dashboard": "डैशबोर्ड",
+    "students": "छात्र",
+    "payments": "भुगतान",
+    "reminders": "अनुस्मारक",
+    "refunds": "धनवापसी",
+    "risk": "जोखिम",
+    "setup": "सेटअप",
+    "signOut": "साइन आउट"
+  },
+  "common": {
+    "loading": "लोड हो रहा है…",
+    "retry": "पुनः प्रयास",
+    "cancel": "रद्द करें",
+    "save": "सहेजें",
+    "confirm": "पुष्टि करें",
+    "search": "खोजें",
+    "filter": "फ़िल्टर",
+    "all": "सभी",
+    "noData": "कोई डेटा नहीं",
+    "error": "कुछ गड़बड़ हुई। कृपया पुनः प्रयास करें।",
+    "notFound": "वह नहीं मिला।",
+    "forbidden": "आपको इसकी अनुमति नहीं है।"
+  },
+  "status": {
+    "paid": "भुगतान हो गया",
+    "upcoming": "आगामी",
+    "part_paid": "आंशिक भुगतान",
+    "overdue": "बकाया",
+    "part_paid_overdue": "आंशिक बकाया",
+    "active": "सक्रिय",
+    "left": "छोड़ा",
+    "completed": "पूर्ण",
+    "open": "खुला",
+    "called": "कॉल किया",
+    "false_flag": "गलत संकेत",
+    "draft": "ड्राफ्ट",
+    "approved": "स्वीकृत",
+    "sent": "भेजा गया",
+    "pending": "लंबित",
+    "skipped": "छोड़ा गया",
+    "cancelled": "रद्द",
+    "cash": "नकद",
+    "cheque": "चेक",
+    "bank_transfer": "बैंक ट्रांसफर",
+    "online": "ऑनलाइन",
+    "high": "उच्च",
+    "medium": "मध्यम"
+  }
+}
+
