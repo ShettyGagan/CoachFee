@@ -21,7 +21,7 @@ export default function Login() {
   const [tab, setTab] = useState<Tab>('parent')
   const [lang, setLang] = useState<'en' | 'hi'>('en')
   const [agreedToTerms, setAgreedToTerms] = useState(true)
-  const [showDemoLogins, setShowDemoLogins] = useState(false)
+
 
   // Staff state
   const [email, setEmail] = useState('')
@@ -217,7 +217,7 @@ export default function Login() {
                   : 'text-gray-500 hover:text-gray-900'
               )}
             >
-              {lang === 'en' ? 'Parent (OTP)' : 'अभिभावक (OTP)'}
+              {lang === 'en' ? 'Parent' : 'अभिभावक'}
             </button>
             <button
               type="button"
@@ -229,7 +229,7 @@ export default function Login() {
                   : 'text-gray-500 hover:text-gray-900'
               )}
             >
-              {lang === 'en' ? 'Staff Login' : 'स्टाफ लॉगिन'}
+              {lang === 'en' ? 'Staff' : 'स्टाफ'}
             </button>
           </div>
 
@@ -258,14 +258,14 @@ export default function Login() {
               {tab === 'parent'
                 ? otpSent
                   ? (lang === 'en'
-                      ? `Enter the 6-digit code sent to +91 ${phone}`
-                      : `+91 ${phone} पर भेजा गया 6-अंकीय कोड दर्ज करें`)
+                    ? `Enter the 6-digit code sent to +91 ${phone}`
+                    : `+91 ${phone} पर भेजा गया 6-अंकीय कोड दर्ज करें`)
                   : (lang === 'en'
-                      ? 'Let us know your mobile number.'
-                      : 'कृपया अपना मोबाइल नंबर दर्ज करें।')
+                    ? 'Let us know your mobile number.'
+                    : 'कृपया अपना मोबाइल नंबर दर्ज करें।')
                 : (lang === 'en'
-                    ? 'Sign in with your institute email and password.'
-                    : 'संस्थान के ईमेल और पासवर्ड से साइन इन करें।')}
+                  ? 'Sign in with your institute email and password.'
+                  : 'संस्थान के ईमेल और पासवर्ड से साइन इन करें।')}
             </p>
           </div>
 
@@ -512,65 +512,7 @@ export default function Login() {
             </form>
           )}
 
-          {/* Quick Demo Credentials Accordion */}
-          <div className="mt-8 pt-6 border-t border-gray-100">
-            <button
-              type="button"
-              onClick={() => setShowDemoLogins(!showDemoLogins)}
-              className="flex items-center justify-between w-full text-xs font-semibold text-gray-500 hover:text-gray-800 transition-colors"
-            >
-              <span>Demo Login Credentials</span>
-              <ChevronDown
-                size={14}
-                className={clsx('transition-transform', showDemoLogins && 'rotate-180')}
-              />
-            </button>
 
-            {showDemoLogins && (
-              <div className="mt-3 p-3.5 bg-gray-50 border border-gray-200 rounded-xl text-xs text-gray-600 space-y-2 animate-in fade-in duration-200">
-                <div className="flex justify-between items-center py-0.5">
-                  <span>Admin:</span>
-                  <button
-                    type="button"
-                    onClick={() => { setTab('staff'); setEmail('admin@coaching.in'); setPassword('admin123') }}
-                    className="font-mono text-emerald-700 hover:underline"
-                  >
-                    admin@coaching.in / admin123
-                  </button>
-                </div>
-                <div className="flex justify-between items-center py-0.5">
-                  <span>Accounts:</span>
-                  <button
-                    type="button"
-                    onClick={() => { setTab('staff'); setEmail('accounts@coaching.in'); setPassword('accounts123') }}
-                    className="font-mono text-emerald-700 hover:underline"
-                  >
-                    accounts@coaching.in / accounts123
-                  </button>
-                </div>
-                <div className="flex justify-between items-center py-0.5">
-                  <span>Counsellor:</span>
-                  <button
-                    type="button"
-                    onClick={() => { setTab('staff'); setEmail('counsellor@coaching.in'); setPassword('counsellor123') }}
-                    className="font-mono text-emerald-700 hover:underline"
-                  >
-                    counsellor@coaching.in / counsellor123
-                  </button>
-                </div>
-                <div className="pt-1.5 border-t border-gray-200 flex justify-between items-center">
-                  <span>Parent Phone:</span>
-                  <button
-                    type="button"
-                    onClick={() => { setTab('parent'); setPhone('9000000001') }}
-                    className="font-mono text-emerald-700 hover:underline"
-                  >
-                    9000000001
-                  </button>
-                </div>
-              </div>
-            )}
-          </div>
         </div>
 
         {/* Footer */}

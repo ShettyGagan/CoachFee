@@ -6,6 +6,7 @@ import { ParentLayout, PublicLayout } from './layouts/ParentLayout'
 import Login from './pages/Login'
 
 // Lazy load protected and secondary routes
+const TermsAndPolicies = lazy(() => import('./pages/TermsAndPolicies'))
 const RefundPolicy = lazy(() => import('./pages/RefundPolicy'))
 const MockGateway = lazy(() => import('./pages/MockGateway'))
 const PaymentReturn = lazy(() => import('./pages/PaymentReturn'))
@@ -48,7 +49,12 @@ export default function App() {
         {/* Public */}
         <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path="/login" element={<RedirectIfAuth><Login /></RedirectIfAuth>} />
-        <Route path="/refund-policy" element={<PublicLayout><RefundPolicy /></PublicLayout>} />
+        <Route path="/terms" element={<TermsAndPolicies initialTab="terms" />} />
+        <Route path="/terms-and-conditions" element={<Navigate to="/terms" replace />} />
+        <Route path="/privacy" element={<TermsAndPolicies initialTab="privacy" />} />
+        <Route path="/privacy-policy" element={<Navigate to="/privacy" replace />} />
+        <Route path="/refund-policy" element={<TermsAndPolicies initialTab="refund" />} />
+        <Route path="/legal" element={<TermsAndPolicies initialTab="terms" />} />
         <Route path="/pay/:token" element={<PublicLayout><MockGateway /></PublicLayout>} />
         <Route path="/payment/return" element={<PaymentReturn />} />
 

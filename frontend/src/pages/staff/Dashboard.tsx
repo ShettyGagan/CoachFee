@@ -58,7 +58,7 @@ const PERIOD_OPTIONS: { value: PeriodType; label: string }[] = [
 ]
 
 export default function Dashboard({ centreId }: { centreId: number | null }) {
-  const [period, setPeriod] = useState<PeriodType>('this_month')
+  const [period, setPeriod] = useState<PeriodType>('all_time')
   const [periodDropdownOpen, setPeriodDropdownOpen] = useState(false)
   const periodRef = useRef<HTMLDivElement>(null)
 
@@ -120,10 +120,10 @@ export default function Dashboard({ centreId }: { centreId: number | null }) {
   // Chart data
   const chartData = ageingList.length > 0 && totalAgeingPaise > 0
     ? ageingList.map(item => ({
-        name: item.formattedLabel,
-        value: item.paise,
-        color: item.color,
-      }))
+      name: item.formattedLabel,
+      value: item.paise,
+      color: item.color,
+    }))
     : [{ name: 'No overdue', value: 1, color: '#E5E7EB' }]
 
   const activeDuesList = duesView === 'centre' ? (dues?.by_centre ?? []) : (dues?.by_batch ?? [])
@@ -266,7 +266,7 @@ export default function Dashboard({ centreId }: { centreId: number | null }) {
 
           {/* 4. Unmatched */}
           <Link
-            to="/staff/payments"
+            to="/staff/payments?tab=unmatched"
             className="group bg-white rounded-2xl border border-gray-100/90 p-5 shadow-xs flex flex-col justify-between hover:border-amber-200 transition-all cursor-pointer"
           >
             <div className="flex items-center gap-3">
@@ -341,7 +341,7 @@ export default function Dashboard({ centreId }: { centreId: number | null }) {
                 ))}
               </div>
             ) : dError ? (
-              <ErrorState message="Could not load dues breakdown" onRetry={() => {}} />
+              <ErrorState message="Could not load dues breakdown" onRetry={() => { }} />
             ) : activeDuesList.length === 0 ? (
               <p className="text-sm text-gray-400 text-center py-10 font-medium">
                 No outstanding dues for this selection.
@@ -413,7 +413,7 @@ export default function Dashboard({ centreId }: { centreId: number | null }) {
             {aLoading ? (
               <div className="animate-pulse h-56 bg-gray-100 rounded-xl" />
             ) : aError ? (
-              <ErrorState message="Could not load overdue ageing" onRetry={() => {}} />
+              <ErrorState message="Could not load overdue ageing" onRetry={() => { }} />
             ) : (
               <div className="flex flex-col sm:flex-row items-center gap-4 py-2">
                 {/* Donut Chart with center value */}

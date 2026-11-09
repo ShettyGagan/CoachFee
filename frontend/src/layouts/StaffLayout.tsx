@@ -360,11 +360,11 @@ export function StaffLayout({ children, centreId, onCentreChange }: StaffLayoutP
                 {/* Footer */}
                 <div className="p-2.5 bg-gray-50/90 border-t border-gray-100 flex items-center justify-between">
                   <Link
-                    to="/staff/payments"
+                    to="/staff/payments?tab=transactions"
                     onClick={() => setNotificationsOpen(false)}
                     className="text-xs font-semibold text-[#059669] hover:text-emerald-700 px-2 py-1 rounded hover:bg-[#E8F8F0] transition-colors w-full text-center"
                   >
-                    View All Payments →
+                    View All Transactions →
                   </Link>
                 </div>
               </div>

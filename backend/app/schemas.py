@@ -286,6 +286,43 @@ class UnmatchedPaymentOut(BaseModel):
     received_at: datetime
 
 
+class UnmatchedListResponse(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    items: list[UnmatchedPaymentOut]
+    total: int
+    total_unallocated_paise: int = 0
+
+
+class TransactionItem(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    payment_id: int
+    student_id: int | None = None
+    student_code: str | None = None
+    student_name: str | None = None
+    batch_name: str | None = None
+    centre_name: str | None = None
+    centre_id: int | None = None
+    amount_paise: int
+    method: str
+    reference: str | None = None
+    status: str
+    received_at: datetime | None = None
+    receipt_id: int | None = None
+    receipt_no: str | None = None
+    recorded_by_name: str | None = None
+    allocated_paise: int = 0
+    unallocated_paise: int = 0
+
+
+class TransactionListResponse(BaseModel):
+    model_config = ConfigDict(extra="ignore")
+    items: list[TransactionItem]
+    total: int
+    total_amount_paise: int = 0
+    online_count: int = 0
+    online_amount_paise: int = 0
+
+
 # ═══════════════════════════════════════════════════════════════════ #
 #                            RECEIPTS                               #
 # ═══════════════════════════════════════════════════════════════════ #

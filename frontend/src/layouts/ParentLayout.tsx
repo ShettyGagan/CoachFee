@@ -80,7 +80,15 @@ export function ParentLayout({ children }: { children: ReactNode }) {
       </main>
 
       {/* Footer */}
-      <footer className="py-6 text-center text-xs text-gray-400 relative z-10">
+      <footer className="py-6 text-center text-xs text-gray-400 relative z-10 flex items-center justify-center gap-3">
+        <Link to="/terms" className="hover:text-gray-700 transition-colors font-medium">
+          Terms & Conditions
+        </Link>
+        <span>·</span>
+        <Link to="/privacy" className="hover:text-gray-700 transition-colors font-medium">
+          Privacy Policy
+        </Link>
+        <span>·</span>
         <Link to="/refund-policy" className="hover:text-gray-700 transition-colors font-medium">
           Refund Policy
         </Link>
