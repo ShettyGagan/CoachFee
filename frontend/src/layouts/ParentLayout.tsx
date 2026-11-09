@@ -26,7 +26,7 @@ export function ParentLayout({ children }: { children: ReactNode }) {
   return (
     <div className="min-h-screen bg-[#F8FAF9] flex flex-col font-sans relative overflow-x-hidden">
       {/* ── Fixed Top Bar Header ────────────────────────────────────────────── */}
-      <header className="sticky top-0 z-40 h-16 bg-[#0B0E0D] border-b border-gray-900 shadow-xs flex items-center px-4 lg:px-8 shrink-0 select-none">
+      <header className="sticky top-0 z-40 h-16 bg-[#0B0E0D] border-b border-gray-900 shadow-xs flex items-center px-4 lg:px-8 shrink-0 select-none no-print print:hidden">
         {/* CoachFee Logo */}
         <Link to="/parent" className="flex items-center gap-3 mr-2">
           <img
@@ -80,7 +80,7 @@ export function ParentLayout({ children }: { children: ReactNode }) {
       </main>
 
       {/* Footer */}
-      <footer className="py-6 text-center text-xs text-gray-400 relative z-10 flex items-center justify-center gap-3">
+      <footer className="py-6 text-center text-xs text-gray-400 relative z-10 flex items-center justify-center gap-3 no-print print:hidden">
         <Link to="/terms" className="hover:text-gray-700 transition-colors font-medium">
           Terms & Conditions
         </Link>
@@ -95,8 +95,8 @@ export function ParentLayout({ children }: { children: ReactNode }) {
       </footer>
 
       {/* Decorative soft mint wave glow on bottom corners */}
-      <div className="fixed -bottom-28 -left-28 w-96 h-96 rounded-full bg-emerald-100/35 blur-3xl pointer-events-none z-0" />
-      <div className="fixed -bottom-28 -right-28 w-96 h-96 rounded-full bg-emerald-100/35 blur-3xl pointer-events-none z-0" />
+      <div className="fixed -bottom-28 -left-28 w-96 h-96 rounded-full bg-emerald-100/35 blur-3xl pointer-events-none z-0 no-print print:hidden" />
+      <div className="fixed -bottom-28 -right-28 w-96 h-96 rounded-full bg-emerald-100/35 blur-3xl pointer-events-none z-0 no-print print:hidden" />
     </div>
   )
 }

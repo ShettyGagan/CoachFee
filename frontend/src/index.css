@@ -64,9 +64,61 @@
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 3px; }
 
-/* Print */
+/* Print styles */
 @media print {
-  .no-print { display: none !important; }
-  .print-only { display: block !important; }
+  @page {
+    size: A4 portrait;
+    margin: 12mm 15mm;
+  }
+
+  /* Reset base print canvas */
+  html, body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    overflow: visible !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Hide everything on page by default */
+  body * {
+    visibility: hidden;
+  }
+
+  /* Only make receipt document and its descendants visible */
+  .receipt-printable-document,
+  .receipt-printable-document * {
+    visibility: visible !important;
+  }
+
+  /* Position the receipt cleanly at the top of the printed page */
+  .receipt-printable-document {
+    position: absolute !important;
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    box-shadow: none !important;
+    background: #ffffff !important;
+    display: block !important;
+    page-break-inside: avoid !important;
+  }
+
+  /* Explicitly remove buttons and non-printable elements */
+  .no-print,
+  .no-print *,
+  header,
+  footer,
+  nav,
+  button {
+    display: none !important;
+    visibility: hidden !important;
+  }
 }
 

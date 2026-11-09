@@ -237,7 +237,7 @@ export function StaffLayout({ children, centreId, onCentreChange }: StaffLayoutP
   return (
     <div className="h-screen flex flex-col bg-[#F9FAFB] font-sans overflow-hidden">
       {/* ── Top Bar Header (Fixed when scrolled) ────────────────────────────── */}
-      <header className="sticky top-0 z-40 h-16 bg-[#0B0E0D] border-b border-gray-900 flex items-center px-4 lg:px-6 gap-4 shrink-0 select-none shadow-xs">
+      <header className="sticky top-0 z-40 h-16 bg-[#0B0E0D] border-b border-gray-900 flex items-center px-4 lg:px-6 gap-4 shrink-0 select-none shadow-xs no-print print:hidden">
         {/* Mobile menu button */}
         <button
           className="lg:hidden text-gray-300 hover:text-white p-1 rounded-md"
@@ -411,13 +411,13 @@ export function StaffLayout({ children, centreId, onCentreChange }: StaffLayoutP
       {/* ── Main Layout Body ─────────────────────────────────────────────────── */}
       <div className="flex flex-1 overflow-hidden">
         {/* Desktop Sidebar */}
-        <aside className="hidden lg:block w-60 bg-white border-r border-gray-200/80 shrink-0 overflow-y-auto">
+        <aside className="hidden lg:block w-60 bg-white border-r border-gray-200/80 shrink-0 overflow-y-auto no-print print:hidden">
           <Sidebar role={role} />
         </aside>
 
         {/* Mobile Sidebar Overlay */}
         {sidebarOpen && (
-          <div className="fixed inset-0 z-40 lg:hidden">
+          <div className="fixed inset-0 z-40 lg:hidden no-print print:hidden">
             <div
               className="absolute inset-0 bg-black/50 backdrop-blur-xs transition-opacity"
               onClick={() => setSidebarOpen(false)}

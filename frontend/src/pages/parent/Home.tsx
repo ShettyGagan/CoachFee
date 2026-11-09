@@ -10,6 +10,7 @@ import { api, ApiError } from '../../lib/api'
 import { formatINR, formatDate } from '../../lib/formatINR'
 import { toast } from 'sonner'
 import { clsx } from 'clsx'
+import { ReceiptSheet } from '../../components/ReceiptSheet'
 
 interface Child {
   student_id: number
@@ -109,88 +110,6 @@ function formatDayOfWeek(dateStr: string): string {
   } catch {
     return '—'
   }
-}
-
-function ReceiptSheet({ receiptId, onClose }: { receiptId: number; onClose: () => void }) {
-  const { data, isLoading } = useQuery<ReceiptDetail>({
-    queryKey: ['parent-receipt', receiptId],
-    queryFn: () => api.get(`/parent/receipts/${receiptId}`),
-  })
-
-  return (
-    <div className="fixed inset-0 z-50 flex justify-end">
-      <div className="absolute inset-0 bg-black/40" onClick={onClose} />
-      <div className="relative w-full max-w-sm bg-white h-full overflow-y-auto shadow-xl p-6">
-        <div className="flex items-center justify-between mb-6">
-          <h2 className="font-semibold text-gray-900">Receipt</h2>
-          <button onClick={onClose} className="text-muted-foreground hover:text-gray-700 text-sm">Close</button>
-        </div>
-        {isLoading ? (
-          <div className="flex justify-center py-8"><Loader2 size={24} className="animate-spin text-primary" /></div>
-        ) : data ? (
-          <div className="space-y-4 print:block">
-            <div className="text-center border-b border-gray-100 pb-4">
-              <img src="/logo.png" alt="CoachFee" className="h-6 mx-auto mb-2 object-contain" />
-              <p className="font-bold text-gray-900">Jaipur Coaching Institute</p>
-              <p className="text-xs text-gray-400 font-medium">Tax Invoice</p>
-            </div>
-            <div className="space-y-2 text-sm">
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Receipt No.</span>
-                <span className="font-medium font-mono">{data.receipt_no}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Date</span>
-                <span>{formatDate(data.created_at)}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Student</span>
-                <span>{data.student_name}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Student Code</span>
-                <span className="font-mono">{data.student_code}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Payment method</span>
-                <span className="capitalize">{data.payment_method.replace('_', ' ')}</span>
-              </div>
-              {data.reference && (
-                <div className="flex justify-between">
-                  <span className="text-muted-foreground">Reference</span>
-                  <span className="font-mono text-xs">{data.reference}</span>
-                </div>
-              )}
-            </div>
-            <div className="border-t border-border pt-3 space-y-2 text-sm">
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Taxable value</span>
-                <span className="font-mono">{(data.taxable_paise / 100).toFixed(2)}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">CGST 9%</span>
-                <span className="font-mono">{(data.cgst_paise / 100).toFixed(2)}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">SGST 9%</span>
-                <span className="font-mono">{(data.sgst_paise / 100).toFixed(2)}</span>
-              </div>
-              <div className="flex justify-between font-semibold text-base border-t border-border pt-2">
-                <span>Total</span>
-                <span>{formatINR(data.total_paise)}</span>
-              </div>
-            </div>
-            <button
-              onClick={() => window.print()}
-              className="btn-primary w-full mt-4"
-            >
-              Print Receipt
-            </button>
-          </div>
-        ) : null}
-      </div>
-    </div>
-  )
 }
 
 export default function ParentHome() {
@@ -779,7 +698,11 @@ export default function ParentHome() {
       )}
 
       {openReceiptId && (
-        <ReceiptSheet receiptId={openReceiptId} onClose={() => setOpenReceiptId(null)} />
+        <ReceiptSheet
+          receiptId={openReceiptId}
+          endpoint={`/parent/receipts/${openReceiptId}`}
+          onClose={() => setOpenReceiptId(null)}
+        />
       )}
     </div>
   )

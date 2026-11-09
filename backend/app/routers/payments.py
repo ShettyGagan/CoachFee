@@ -318,6 +318,15 @@ def get_receipt(
     _: dict = Depends(require_staff()),
     db: Session = Depends(get_db),
 ):
-    """Get a single receipt."""
-    return fee_svc.get_receipt(db, receipt_id)
+    """Get a single receipt with flattened aliases for frontend compatibility."""
+    res = fee_svc.get_receipt(db, receipt_id)
+    student = res.get("student") or {}
+    payment = res.get("payment") or {}
+    res["receipt_id"] = receipt_id
+    res["created_at"] = res.get("issued_at")
+    res["student_name"] = student.get("full_name", "")
+    res["student_code"] = student.get("student_code", "")
+    res["payment_method"] = payment.get("method", "")
+    res["reference"] = payment.get("reference", None)
+    return res
 
